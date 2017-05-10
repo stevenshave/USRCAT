@@ -19,13 +19,13 @@ public:
                                                                 // iterators
 
 private:
-  std::vector<std::string> smartspatterns{
-      "*",                                                   // All atoms
-      "[#6+0!$(*~[#7,#8,F]),SH0+0v2,s+0,S^3,Cl+0,Br+0,I+0]", // Hydrophobic
-      "[a]",                                                 // Aromatic
-      "[$([O,S;H1;v2]-[!$(*=[O,N,P,S])]),$([O,S;H0;v2]),$([O,S;-]),$([N&v3;H1,"
-      "H2]-[!$(*=[O,N,P,S])]),$([N;v3;H0]),$([n,o,s;+0]),F]", // Acceptor
-      "[N!H0v3,N!H0+v4,OH+0,SH+0,nH+0]"};                     // Donor
+	const std::array<std::string,5> smartspatterns{ {
+		"[!#1]",                                                   // All atoms
+		"[#6+0!$(*~[#7,#8,F]),SH0+0v2,s+0,S^3,Cl+0,Br+0,I+0]", // Hydrophobic
+		"[a]",                                                 // Aromatic
+		"[$([O,S;H1;v2]-[!$(*=[O,N,P,S])]),$([O,S;H0;v2]),$([O,S;-]),$([N&v3;H1,"
+		"H2]-[!$(*=[O,N,P,S])]),$([N;v3;H0]),$([n,o,s;+0]),F]", // Acceptor
+		"[N!H0v3,N!H0+v4,OH+0,SH+0,nH+0]"} };                     // Donor
 
   inline USRTRIPPLE GetTripple(const std::vector<XYZ> &coords,
                                const XYZ &point) const;
