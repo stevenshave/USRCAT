@@ -1,4 +1,4 @@
-#USRCAT
+# USRCAT
 
 This C++ implementation of USRCAT provides all required basic functionality to perform ligand based virtual screening and database searching.
 
