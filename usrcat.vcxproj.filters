@@ -20,11 +20,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="usrcat.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="KeepN.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Usrcat.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
