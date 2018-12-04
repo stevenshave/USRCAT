@@ -4,8 +4,10 @@
 #include <openbabel/mol.h>
 #include <openbabel/obconversion.h>
 
-int main(int argc, char *argv[]) {
-  if (argc != 4 && argc != 5) {
+int main(int argc, char *argv[])
+{
+  if (argc != 4 && argc != 5)
+  {
     std::cerr << "Usage: ./usrcat query.sdf candidates.sdf numtokeep "
                  "[outfile.sdf]\n";
     std::cerr << "If outfile.sdf is ommitted, output is sent to the terminal "
@@ -16,7 +18,8 @@ int main(int argc, char *argv[]) {
 
   auto ReadMolFromStream = [](OpenBabel::OBConversion &conv,
                               OpenBabel::OBMol &out) {
-    if (conv.Read(&out)) {
+    if (conv.Read(&out))
+    {
       return true;
     }
     return false;
@@ -28,8 +31,8 @@ int main(int argc, char *argv[]) {
   OpenBabel::OBConversion obconv;
   obconv.SetInAndOutFormats("sdf", "sdf");
   obconv.SetInStream(&inFileNeedle);
-
-  if (!ReadMolFromStream(obconv, needle)) {
+  if (!ReadMolFromStream(obconv, needle))
+  {
     std::cerr << "Error reading from query file: " << argv[1] << '\n';
     exit(EXIT_FAILURE);
   };
@@ -46,15 +49,16 @@ int main(int argc, char *argv[]) {
               << (inFileHaystack.tellg() / float(endFilePos) * 100) << "% ("
               << counter / 1000 << "k complete)\r";
   };
-
   Usrcat usrcat;
   USRCATDESCRIPTORS needleDescriptors = usrcat.GetUsrcatValues(needle);
-
-  for (auto &i : needleDescriptors)std::cerr << i << ",";
+  for (auto &i : needleDescriptors)
+    std::cerr << i << ",";
   std::cerr << "\n";
 
-  while (inFileHaystack.tellg() < endFilePos) {
-    if (!ReadMolFromStream(obconv, haystackmember)) {
+  while (inFileHaystack.tellg() < endFilePos)
+  {
+    if (!ReadMolFromStream(obconv, haystackmember))
+    {
       std::cerr << "Invalid molecule found immediately before file position "
                    "byte offset: "
                 << inFileHaystack.tellg() << "\n";
@@ -65,7 +69,8 @@ int main(int argc, char *argv[]) {
                  usrcat.score(needleDescriptors,
                               usrcat.GetUsrcatValues(haystackmember)));
 
-    if (counter % 1000 == 0) {
+    if (counter % 1000 == 0)
+    {
       PrintProgress();
     }
   }
@@ -82,13 +87,17 @@ int main(int argc, char *argv[]) {
     mol.SetData(label);
   };
 
-  if (argc == 4) {
+  if (argc == 4)
+  {
     obconv.SetOutStream(&std::cout);
-  } else {
+  }
+  else
+  {
     outFile.open(argv[4]);
     obconv.SetOutStream(&outFile);
   }
-  for (auto i : keepn.best) {
+  for (auto i : keepn.best)
+  {
     OpenBabel::OBMol outmol(
         i.first); // keepn.best is const, so we cant add to it
     AddLabelToMol(outmol, std::string("USRCATScore"),
